@@ -6,6 +6,7 @@
  *
  * Return: status code.
  */
+
 int run_command(const char *cmd)
 {
 	int status = 0;
@@ -15,6 +16,9 @@ int run_command(const char *cmd)
 
 	if (!cmd || is_blank(cmd))
 		return (0);
+
+	if (strcmp(cmd, "exit") == 0)
+		return (-1);
 
 	argv = tokenize_command(cmd);
 	if (!argv || !argv[0])
@@ -47,3 +51,4 @@ int run_command(const char *cmd)
 
 	return (status);
 }
+

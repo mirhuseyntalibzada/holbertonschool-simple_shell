@@ -5,6 +5,7 @@
  *
  * Return: process exit status.
  */
+
 int main(void)
 {
 	char *line = NULL;
@@ -12,7 +13,8 @@ int main(void)
 	ssize_t nread;
 	int last_status = 0;
 	char *cmd;
-	
+	int run_status;
+
 	while (1)
 	{
 		print_prompt();
@@ -27,9 +29,12 @@ int main(void)
 		strip_newline(line);
 		cmd = trim_spaces(line);
 
-		if (!is_blank(line))
+		if (!is_blank(cmd))
 		{
-			last_status = run_command(cmd);
+			run_status = run_command(cmd);
+			if (run_status == -1)
+				break;
+			last_status = run_status;
 		}
 	}
 
