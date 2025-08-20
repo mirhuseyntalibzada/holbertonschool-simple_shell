@@ -7,17 +7,41 @@
  */
 char *build_bin_path(const char *cmd)
 {
-	char *path;
-	size_t len_bin = 5; /* strlen("/bin/") */
-	size_t len_cmd;
+	char *path_env, *dir, *full_path;
+	char *saveptr = NULL;
+	size_t len;
 
 	if (!cmd)
-		return (NULL);
-	len_cmd = strlen(cmd);
-	path = malloc(len_bin + len_cmd + 1);
-	if (!path)
-		return (NULL);
-	strcpy(path, "/bin/");
-	strcpy(path + len_bin, cmd);
-	return (path);
+		return NULL;
+
+	path_env = getenv("PATH");
+	if (!path_env || *path_env == '\0')
+		return NULL;
+
+	path_env = strdup(path_env);
+	if (!path_env)
+		return NULL;
+
+	dir = strtok_r(path_env, ":", &saveptr);
+	while (dir)
+	{
+		len = strlen(dir) + 1 + strlen(cmd) + 1;
+		full_path = malloc(len);
+		if (!full_path)
+		{
+			free(path_env);
+			return NULL;
+		}
+		snprintf(full_path, len, "%s/%s", dir, cmd);
+		if (access(full_path, X_OK) == 0)
+		{
+			free(path_env);
+			return full_path;
+		}
+		free(full_path);
+		dir = strtok_r(NULL, ":", &saveptr);
+	}
+
+	free(path_env);
+	return NULL;
 }

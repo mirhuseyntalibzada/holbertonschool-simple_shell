@@ -15,16 +15,16 @@ int run_command(const char *cmd)
 	char **argv = NULL;
 
 	if (!cmd || is_blank(cmd))
-		return (0);
+		return 0;
 
 	if (strcmp(cmd, "exit") == 0)
-		return (-1);
+		return -1;
 
 	argv = tokenize_command(cmd);
 	if (!argv || !argv[0])
 	{
 		free_argv(argv);
-		return (0);
+		return 0;
 	}
 
 	if (contains_slash(argv[0]))
@@ -38,7 +38,7 @@ int run_command(const char *cmd)
 		{
 			perror("malloc");
 			free_argv(argv);
-			return (1);
+			return 1;
 		}
 		use_free = 1;
 	}
@@ -49,6 +49,5 @@ int run_command(const char *cmd)
 		free(path);
 	free_argv(argv);
 
-	return (status);
+	return status;
 }
-
