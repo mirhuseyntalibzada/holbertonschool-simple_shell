@@ -11,7 +11,8 @@ int main(void)
 	size_t cap = 0;
 	ssize_t nread;
 	int last_status = 0;
-
+	char *cmd;
+	
 	while (1)
 	{
 		print_prompt();
@@ -24,8 +25,12 @@ int main(void)
 		}
 
 		strip_newline(line);
+		cmd = trim_spaces(line);
+
 		if (!is_blank(line))
-			last_status = run_command(line);
+		{
+			last_status = run_command(cmd);
+		}
 	}
 
 	free(line);

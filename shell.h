@@ -21,5 +21,6 @@ int is_blank(const char *s);
 int contains_slash(const char *s);
 char *build_bin_path(const char *cmd);
 int run_command(const char *cmd);
+char *trim_spaces(char *s);
 
 #endif
