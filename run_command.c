@@ -35,10 +35,9 @@ int run_command(const char *cmd)
                 path = build_bin_path(argv[0]);
                 if (!path)
                 {
-                        /* Exact format the checker wants */
-                        dprintf(STDERR_FILENO, "%s: %d: %s: not found\n",
-                                g_progname, g_cmd_count, argv[0]);
-                        free_argv(argv);
+                        fprintf(stderr, "%s: %d: %s: not found\n",
+        			g_progname, g_cmd_count, argv[0]);
+			free_argv(argv);
                         return (127);
                 }
                 use_free = 1;
