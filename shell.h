@@ -15,6 +15,8 @@ extern char **environ;
 #define PROMPT "$ "
 
 /* ===================== Prototypes ===================== */
+char *_strtok(char *str, const char *delim);
+char *_getenv(const char *name);
 void print_prompt(void);
 void strip_newline(char *s);
 int is_blank(const char *s);

@@ -8,13 +8,12 @@
 char *build_bin_path(const char *cmd)
 {
 	char *path_env, *dir, *full_path;
-	char *saveptr = NULL;
 	size_t len;
 
 	if (!cmd)
 		return NULL;
 
-	path_env = getenv("PATH");
+	path_env = _getenv("PATH");
 	if (!path_env || *path_env == '\0')
 		return NULL;
 
@@ -22,7 +21,7 @@ char *build_bin_path(const char *cmd)
 	if (!path_env)
 		return NULL;
 
-	dir = strtok_r(path_env, ":", &saveptr);
+	dir = _strtok(path_env, ":");
 	while (dir)
 	{
 		len = strlen(dir) + 1 + strlen(cmd) + 1;
@@ -39,7 +38,7 @@ char *build_bin_path(const char *cmd)
 			return full_path;
 		}
 		free(full_path);
-		dir = strtok_r(NULL, ":", &saveptr);
+		dir = _strtok(NULL, ":");
 	}
 
 	free(path_env);

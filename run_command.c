@@ -36,7 +36,7 @@ int run_command(const char *cmd)
 		path = build_bin_path(argv[0]);
 		if (!path)
 		{
-			perror("malloc");
+			fprintf(stderr, "%s: command not found\n", argv[0]);
 			free_argv(argv);
 			return 1;
 		}

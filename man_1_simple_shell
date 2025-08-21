@@ -1,0 +1,35 @@
+.\" Manpage for simple_shell
+.TH SIMPLE_SHELL 1 "August 2025" "v0.4" "User Commands"
+.SH NAME
+simple_shell \- a simple command line interpreter
+.SH SYNOPSIS
+.B simple_shell
+.RI [ "command" ... ]
+.SH DESCRIPTION
+.B simple_shell
+is a basic Unix command line interpreter that reads commands from standard input, executes them, and displays the output.
+It supports running binaries from the system PATH or directly from their full path.
+.SH FEATURES
+.TP
+Handles command lines with arguments.
+.TP
+Supports the built-in
+.B exit
+command to quit the shell.
+.TP
+Trims extra whitespace and handles empty input lines.
+.SH USAGE
+Run the shell by executing:
+.RS
+$ ./hsh
+.RE
+Then type commands as you would in a regular shell:
+.RS
+$ ls -l
+$ /bin/ls /var
+$ exit
+.RE
+.SH AUTHOR
+Huseyn Talibzade, Aysun Meherremova
+.SH COPYRIGHT
+This is free software: you can redistribute it and/or modify it under the terms of the MIT License.
