@@ -11,6 +11,8 @@
 #include <errno.h>
 
 extern char **environ;
+extern char *g_progname;
+extern int g_cmd_count;
 
 #define PROMPT "$ "
 
